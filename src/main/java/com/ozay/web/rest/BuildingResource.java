@@ -121,7 +121,7 @@ public class BuildingResource {
         User user = userRepository.findOneByLogin(SecurityUtils.getCurrentLogin()).get();
         building.setCreatedBy(user.getId());
         building.setLastModifiedBy(user.getId());
-        AccountInformation accountInformation = accountRepository.getLoginUserInformation(user, null, null);
+        AccountInformation accountInformation = accountRepository.getLoginUserInformation(user);
         building.setOrganizationId(accountInformation.getOrganizationId());
         Integer insertedId = buildingRepository.create(building);
         log.debug("REST request : Building insertedId " + insertedId);

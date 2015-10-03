@@ -42,6 +42,7 @@ public class RoleService {
     @Transactional
     public void create(RoleFormDTO roleFormDTO){
         Long id = roleRepository.create(roleFormDTO.getRole());
+        roleFormDTO.getRole().setId(id);
         this.createRollPermissions(roleFormDTO.getRole());
         this.organizationUserUpdate(roleFormDTO);
     }
@@ -69,7 +70,9 @@ public class RoleService {
     private void organizationUserUpdate(RoleFormDTO roleFormDTO){
         Role role = roleFormDTO.getRole();
         List<OrganizationUserRoleDTO> organizationUserRoleDTOs = roleFormDTO.getOrganizationUserRoleDTOs();
-
+        if(organizationUserRoleDTOs == null){
+            return;
+        }
 
         for(OrganizationUserRoleDTO organizationUserRoleDTO : organizationUserRoleDTOs){
             Member member = memberRepository.findOneByUserIdAndBuildingId(organizationUserRoleDTO.getUserId(), role.getBuildingId());

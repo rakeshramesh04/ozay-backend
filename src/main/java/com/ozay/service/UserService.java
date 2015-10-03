@@ -186,8 +186,10 @@ public class UserService {
 
         AccountInformation accountInformation = null;
         if(buildingId == null && organizationId == null){
+            System.out.println(123);
             accountInformation = accountRepository.getLoginUserInformation(user);
         } else {
+            System.out.println(456);
             accountInformation = accountRepository.getLoginUserInformation(user, buildingId, organizationId);
         }
 
@@ -232,7 +234,6 @@ public class UserService {
         }
         if(isAdmin == false) {
             AccountInformation accountInformation = this.getUserInformation(currentUser, buildingId, organizationId);
-
         }
 
         return currentUser;
