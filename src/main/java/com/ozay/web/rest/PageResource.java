@@ -6,10 +6,12 @@ import com.ozay.model.Building;
 import com.ozay.model.Member;
 import com.ozay.repository.*;
 import com.ozay.web.rest.dto.BuildingRoleWrapperDTO;
+import com.ozay.web.rest.dto.OrganizationUserDTO;
 import com.ozay.web.rest.dto.OrganizationUserRoleDTO;
 import com.ozay.web.rest.dto.UserDTO;
 import com.ozay.web.rest.dto.page.MemberDetailPage;
 import com.ozay.web.rest.dto.page.OrganizationPage;
+import com.ozay.web.rest.dto.page.OrganizationUserPage;
 import com.ozay.web.rest.dto.page.RolePage;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,14 +49,13 @@ public class PageResource {
     OrganizationUserRepository organizationUserRepository;
 
     @Inject
-    PermissionRepository permissionRepository;
-
-    @Inject
     RoleMemberRepository roleMemberRepository;
 
     @Inject
     MemberRepository memberRepository;
 
+    @Inject
+    PermissionRepository permissionRepository;
 
     /**
      * GET  /Organization -> get organizations.
@@ -138,6 +139,36 @@ public class PageResource {
         return new ResponseEntity<RolePage>(rolePage, HttpStatus.OK);
 
     }
+
+    /**
+     * GET
+     */
+    @RequestMapping(value = "/organization-user-new",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<OrganizationUserPage> pageOrganizationUserNew(){
+        OrganizationUserPage organizationUserPage = new OrganizationUserPage();
+        organizationUserPage.setPermissions(permissionRepository.getOrganizationPermissions());
+        return new ResponseEntity<OrganizationUserPage>(organizationUserPage, HttpStatus.OK);
+    }
+
+    /**
+     * GET
+     */
+    @RequestMapping(value = "/organization-user-edit",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<OrganizationUserPage> pageOrganizationUserEdit(@RequestParam(value = "organization") Long organizationId, Long userId){
+        OrganizationUserDTO organizationUserDTO = organizationUserRepository.findOrganizationUser(userId, organizationId);
+        OrganizationUserPage organizationUserPage = new OrganizationUserPage();
+        organizationUserPage.setOrganizationUserDTO(organizationUserDTO);
+        organizationUserPage.setPermissions(permissionRepository.getOrganizationPermissions());
+        return new ResponseEntity<OrganizationUserPage>(organizationUserPage, HttpStatus.OK);
+    }
+
+
     // Role Edit/New page function
 
     private RolePage findOrganizationUserRoles(Long organizationId, Long buildingId, Long roleId){

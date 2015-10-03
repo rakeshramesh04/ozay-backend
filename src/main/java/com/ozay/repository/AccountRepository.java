@@ -75,11 +75,7 @@ public class AccountRepository {
 
     public AccountInformation getLoginUserInformation(User user){
 
-        String query = "SELECT DISTINCT s.id as s_id, s.user_id as s_user_id, o.id as organization_id " +
-            "FROM t_user u " +
-            "LEFT JOIN subscription s ON s.user_id = u.id " +
-            "LEFT JOIN organization o ON o.user_id = s.user_id  " +
-            "WHERE u.id = :id AND o.id is not null ";
+        String query = "SELECT DISTINCT s.id as s_id, s.user_id as s_user_id, o.id as organization_id FROM t_user u LEFT JOIN subscription s ON s.user_id = u.id LEFT JOIN organization o ON o.user_id = s.user_id WHERE u.id = :id ";
 
         MapSqlParameterSource params = new MapSqlParameterSource();
 
