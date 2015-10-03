@@ -7,7 +7,7 @@ angular.module('ozayApp')
 			deleteBtn : false,
 	};
 	$scope.getAll = function (method, id) {
-		Member.get({building: id}, function(result) {
+		Member.query({building: id}, function(result) {
 			$scope.members = result;
 		});
 	};
@@ -77,7 +77,7 @@ angular.module('ozayApp')
 
 	$scope.submitted = false;
 	$scope.role = [];
-	$scope.member = [];
+	$scope.member = {};
 	$scope.member.user = [];
 
 
