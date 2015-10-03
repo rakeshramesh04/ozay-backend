@@ -228,7 +228,7 @@ ozayApp.factory('AuthenticationSharedService', function ($rootScope, $http, auth
                         }
                         var organization = 0;
                         if($stateParams.organizationId !== undefined){
-                            organization = $stateParams.organizationId
+                            organization = $stateParams.organizationId;
                         }
 
                         Account.get({method: method, buildingId:buildingId, organization:organization},function(data) {
