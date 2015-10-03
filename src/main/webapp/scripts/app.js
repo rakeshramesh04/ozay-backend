@@ -219,7 +219,7 @@ ozayApp
 		templateUrl: 'views/directory_details.html',
 		controller: 'MemberDetailController',
 		access: {
-			authorizedRoles: [USER_ROLES.subscriber, USER_ROLES.access_directory_edit , USER_ROLES.subscriber]
+			authorizedRoles: [USER_ROLES.admin, USER_ROLES.subscriber, USER_ROLES.access_directory_edit , USER_ROLES.subscriber]
 		}
 	})
 	.state('home.password', {

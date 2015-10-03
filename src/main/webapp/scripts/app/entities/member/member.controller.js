@@ -77,7 +77,7 @@ angular.module('ozayApp')
 
 	$scope.submitted = false;
 	$scope.role = [];
-	$scope.member = [];
+	$scope.member = {};
 	$scope.member.user = [];
 
 
