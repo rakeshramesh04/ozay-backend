@@ -37,6 +37,10 @@ angular.module('ozayApp')
 		$scope.create_text = true;
 	}
 
+	$scope.cancel = function(){
+	    $state.go('home.organization');
+	}
+
 	$scope.create = function () {
 		$scope.button = false;
 		var confirm = ("Would you like to save?");
@@ -45,7 +49,7 @@ angular.module('ozayApp')
 				Organization.save($scope.organization,
 						function (data) {
 					$scope.showSuccessAlert = true;
-					$scope.successTextAlert = data.response;
+					$scope.successTextAlert = 'Successfully created';
 				}, function (error){
 					$scope.showErrorAlert = true;
 					$scope.errorTextAlert = "Error! Please try later.";
@@ -56,7 +60,7 @@ angular.module('ozayApp')
 				Organization.update($scope.organization,
 						function (data) {
 					$scope.showSuccessAlert = true;
-					$scope.successTextAlert = data.response;
+					$scope.successTextAlert = 'Successfully updated';
 				}, function (error){
 					$scope.showErrorAlert = true;
 					$scope.errorTextAlert = "Error! Please try later.";
