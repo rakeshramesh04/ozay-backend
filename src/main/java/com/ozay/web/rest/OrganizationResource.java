@@ -73,6 +73,7 @@ public class OrganizationResource {
         log.debug("REST request to create an organization, {}", organization);
         User user = userRepository.findOneByLogin(SecurityUtils.getCurrentLogin()).get();
         AccountInformation accountInformation = accountRepository.getLoginUserInformation(user);
+        organization.setUserId(user.getId());
         organization.setSubscriptionId(accountInformation.getSubscriptionId());
         organization.setCreatedBy(user.getId());
         organizationRepository.create(organization);
