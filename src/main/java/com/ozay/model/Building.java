@@ -119,6 +119,7 @@ public class Building {
             "id='" + id + '\'' +
             "organizationId='" + organizationId + '\'' +
             "name='" + name + '\'' +
+            "email='" + email + '\'' +
             "}";
     }
 }

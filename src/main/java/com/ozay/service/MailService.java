@@ -5,6 +5,7 @@ import com.ozay.model.Building;
 import com.ozay.model.Notification;
 import com.ozay.model.NotificationRecord;
 import com.ozay.repository.MemberRepository;
+import com.ozay.repository.BuildingRepository;
 import com.sendgrid.SendGrid;
 import com.sendgrid.SendGridException;
 import org.apache.commons.lang.CharEncoding;
@@ -50,6 +51,9 @@ public class MailService {
     private MemberRepository memberRepository;
 
     @Inject
+    private BuildingRepository buildingRepository;
+
+    @Inject
     private SpringTemplateEngine templateEngine;
 
     /**
@@ -67,7 +71,7 @@ public class MailService {
     }
 
     public int sendGrid(Notification notification, List<NotificationRecord> notificationRecords, String baseUrl){
-        SendGrid sendgrid = new SendGrid("OzayOrg", "Sendgrid");
+        SendGrid sendgrid = new SendGrid("OzayOrg", "SendGrid");
 
         int sentCount = 0;
 
@@ -100,7 +104,15 @@ public class MailService {
 
         String content = templateEngine.process("notification", context);
 
-        sendGrid.setFrom("noreply@ozay.us");
+
+        String buildingEmail = buildingRepository.getBuilding(notification.getBuildingId()).getEmail();
+        if(buildingEmail != null) {
+            sendGrid.setFrom(buildingEmail);
+        }
+        else {
+            sendGrid.setFrom("noreply@ozay.us");
+        }
+
         sendGrid.setSubject(notification.getSubject());
         sendGrid.setHtml(content);
 
