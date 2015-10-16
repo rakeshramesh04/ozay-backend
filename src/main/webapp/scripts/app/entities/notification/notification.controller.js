@@ -282,10 +282,9 @@ angular.module('ozayApp')
 		});
 	}
 
+})
 
-
-
-}).controller('NotificationArchiveController', function ($scope, $filter, $rootScope, $cookieStore, Notification, Member, $sce) {
+.controller('NotificationArchiveController', function ($scope, $filter, $rootScope, $cookieStore, Notification, Member, $sce) {
 
 	$scope.trustAsHtml = function(html){
 		return $sce.trustAsHtml(html);
@@ -296,8 +295,13 @@ angular.module('ozayApp')
 
 		Notification.query({ building:$rootScope.selectedBuilding}, function(result) {
 			$scope.notifications = result;
+			//$scope.emailCount =notification.notificationRecordList.length;
 		});
 	};
+
+
+
+
 	$rootScope.$watch('selectedBuilding', function() {
 		if($rootScope.selectedBuilding !== undefined){
 			$scope.loadAll();

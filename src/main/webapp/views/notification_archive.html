@@ -12,8 +12,10 @@
                     <tr>
                         <th></th>
                         <th><a href="" ng-click="predicate = 'createdDate'; reverse=!reverse">Date</a></th>
+                        <th><a href="" ng-click="predicate = 'createdBy'; reverse=!reverse">Sent By</a></th>
                         <th><a href="" ng-click="predicate = 'subject'; reverse=!reverse">Subject</a></th>
                         <th><a href="" ng-click="predicate = 'notice'; reverse=!reverse">Message</a></th>
+                        <!--<th>Recipients</th>-->
                         <th>Details</th>
                     </tr>
                     </thead>
@@ -21,8 +23,10 @@
                     <tr ng-repeat="notification in notifications | orderBy:predicate:reverse">
                         <td></td>
                         <td>{{notification.createdDate | date: "MM/dd/yyyy"}}</td>
+                        <td>{{notification.createdBy}}</td>
                         <td>{{notification.subject}}</td>
                         <td ng-bind-html="trustAsHtml(notification.notice)"></td>
+                        <!--<td>{{emailCount}}</td>-->
                         <td><a href="#/notification_archive/view/{{notification.id}}">View</a></td>
                     </tr>
 
