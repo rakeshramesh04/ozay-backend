@@ -134,9 +134,10 @@ ozayApp
 	.state('home.collaborate_create', {
 		url: "/collaborate_create",
 		templateUrl: "/views/collaborate_create.html",
+		controller: 'NotificationController',
 		access: {
-			authorizedRoles: [USER_ROLES.user]
-		}
+        			authorizedRoles: [USER_ROLES.admin, USER_ROLES.access_notification_create, USER_ROLES.subscriber]
+        		}
 	})
 
 	.state('home.collaborate_track', {
