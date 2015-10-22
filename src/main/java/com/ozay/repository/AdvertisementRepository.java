@@ -2,6 +2,8 @@ package com.ozay.repository;
 
 import com.ozay.model.Advertisement;
 import com.ozay.rowmapper.AdvertisementRowMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -17,6 +19,8 @@ import java.util.List;
 @Repository
 public class AdvertisementRepository {
 
+    private final Logger log = LoggerFactory.getLogger(AdvertisementRepository.class);
+
     @Inject
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
@@ -25,10 +29,12 @@ public class AdvertisementRepository {
         String query = "select * from advertisement WHERE srNo = :srNo";
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("srNo", srNo);
+        //log.debug("Null??");
         List<Advertisement> list =  namedParameterJdbcTemplate.query(query, params, new AdvertisementRowMapper(){});
 
+
         if(list.size() == 1){
-            return list.get(0);
+            return (Advertisement) list.get(0);
         }
         else {
             return null;

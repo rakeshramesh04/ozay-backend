@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">-->
-
 <html xmlns:th="http://www.thymeleaf.org">
-<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
-<head>
-    <title>Notification</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-   <!-- <meta name="viewport" content="width=device-width"/> -->
 
-</head>
+<div style="border-top: 0.25cm solid #fec912"></div>
+<center>
+    <a href="http://ozay.us/#/login"><img src="http://ozay.us/assets/images/logo_email.png" width="100px" /></a>
+</center>
+
+
+    <head>
+        <title>Notification</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    </head>
     <body>
-
-    <div style="border-top: 0.25cm;border-top-color: #fec912; border-top-style: solid;"></div>
-    <center>
-        <a href="http://ozay.us/#/login"><img src="http://ozay.us/assets/images/logo_email.png" width="100px" /></a>
-    </center>
-
 
         <div th:utext="${body}">
 
         </div>
+
     </body>
 
-<!--footer-->
+
+<!--footer--
+
 
 <div style="background-color:#fec612;color:#ffffff;font-size:12px;font-family:Tahoma;
             padding:10px;
@@ -41,22 +41,20 @@
 
 <div><br /></div>
 
-<!--
 <div style="background-color:#E7E3E4;color:#000000;font-size:12px;  font-family:Tahoma;
             padding:10px;
             display: block;
             align-items: flex-end;
             flex-wrap: wrap;
             white-space: wrap;">
-    <center>
-
-
+   <center>
+    <!--Column 1-->
     <span>
         <table  style="font-size:12px;">
-            <tr><td>10% off with this email at:</td></tr>
+            <tr><td th:text="${string}">10% off with this email at:</td></tr>
         </table>
     </span>
-
+    <!--Column 2-->
     <span>
         <a href="http://www.bearnyc.com/">
             <img src="http://ozay.us/assets/images/bear1.png" width="100px" />
@@ -64,13 +62,14 @@
     </span>
     <span>
         <table style="font-size:12px;">
-            <tr><td style="text-decoration:none !important;">12-14 31st Avenue, 11106</td></tr>
+        <tr><td th:text="${address}"style="text-decoration:none !important;">12-14 31st Avenue, 11106</td></tr>
         </table>
     </span>
 
-    </center>
+   </center>
 </div>
 
--->
+
+
 
 </html>

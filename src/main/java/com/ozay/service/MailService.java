@@ -1,11 +1,12 @@
 package com.ozay.service;
 
 import com.ozay.domain.User;
+import com.ozay.model.Advertisement;
 import com.ozay.model.Building;
 import com.ozay.model.Notification;
 import com.ozay.model.NotificationRecord;
+import com.ozay.repository.AdvertisementRepository;
 import com.ozay.repository.MemberRepository;
-import com.ozay.repository.BuildingRepository;
 import com.sendgrid.SendGrid;
 import com.sendgrid.SendGridException;
 import org.apache.commons.lang.CharEncoding;
@@ -51,9 +52,6 @@ public class MailService {
     private MemberRepository memberRepository;
 
     @Inject
-    private BuildingRepository buildingRepository;
-
-    @Inject
     private SpringTemplateEngine templateEngine;
 
     /**
@@ -71,7 +69,7 @@ public class MailService {
     }
 
     public int sendGrid(Notification notification, List<NotificationRecord> notificationRecords, String baseUrl){
-        SendGrid sendgrid = new SendGrid("OzayOrg", "SendGrid");
+        SendGrid sendgrid = new SendGrid("OzayOrg", "Ozaysyzn1124");
 
         int sentCount = 0;
 
@@ -101,18 +99,11 @@ public class MailService {
 
         context.setVariable("body", body);
         context.setVariable("baseUrl", baseUrl);
-
+        AdvertisementRepository advertisementRepository = new AdvertisementRepository();
+        this.addAdvertisement(context);
         String content = templateEngine.process("notification", context);
 
-
-        String buildingEmail = buildingRepository.getBuilding(notification.getBuildingId()).getEmail();
-        if(buildingEmail != null) {
-            sendGrid.setFrom(buildingEmail);
-        }
-        else {
-            sendGrid.setFrom("noreply@ozay.us");
-        }
-
+        sendGrid.setFrom("noreply@ozay.us");
         sendGrid.setSubject(notification.getSubject());
         sendGrid.setHtml(content);
 
@@ -209,5 +200,15 @@ public class MailService {
         String content = templateEngine.process("existingUserInvited", context);
         String subject = messageSource.getMessage("email.reset.title", null, locale);
         sendEmail(user.getEmail(), subject, content, false, true);
+    }
+
+    private void addAdvertisement(Context context)
+    {
+        AdvertisementRepository advertisementRepository = new AdvertisementRepository();
+        Advertisement advertisement = advertisementRepository.getAdvertisement(1);
+        context.setVariable("imageLink", advertisement.getImageLink());
+        context.setVariable("pageLink", advertisement.getPageLink());
+        context.setVariable("address", advertisement.getAddress());
+        context.setVariable("string", advertisement.getString());
     }
 }
