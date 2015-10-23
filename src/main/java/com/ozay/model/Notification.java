@@ -24,6 +24,7 @@ public class Notification{
 
     private DateTime createdDate;
 
+    private Integer  emailCount;
 
     private List<NotificationRecord> notificationRecordList;
 
@@ -83,6 +84,10 @@ public class Notification{
         this.subject = subject;
     }
 
+    public Integer getEmailCount() { return emailCount; }
+
+    public void setEmailCount(int emailCount) { this.emailCount = emailCount; }
+
 
     public List<NotificationRecord> getNotificationRecordList() {
         return notificationRecordList;
@@ -122,6 +127,7 @@ public class Notification{
                 ", issueDate='" + issueDate + "'" +
                 ", createdBy='" + createdBy + "'" +
                 ", createdDate='" + createdDate + "'" +
+                ", emailCount='" + emailCount + "'" +
                 '}';
     }
 }
