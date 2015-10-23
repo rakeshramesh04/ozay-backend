@@ -23,7 +23,7 @@
                     <tr ng-repeat="notification in notifications | orderBy:predicate:reverse">
                         <td></td>
                         <td>{{notification.createdDate | date: "MM/dd/yyyy"}}</td>
-                        <td>{{notification.createdBy}}  [{{notification.emailCount}} recipient(s)]</td>
+                        <td>{{notification.createdBy}}  [ {{notification.emailCount}} ]</td>
                         <td>{{notification.subject}}</td>
                         <td ng-bind-html="trustAsHtml(notification.notice)"></td>
                         <!--<td>{{emailCount}}</td>-->
