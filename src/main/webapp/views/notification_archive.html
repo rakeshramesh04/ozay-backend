@@ -24,7 +24,7 @@
                         <td>{{notification.createdDate | date: "MM/dd/yyyy"}}</td>
                         <td>{{notification.subject}}</td>
                         <td ng-bind-html="trustAsHtml(notification.notice)"></td>
-                        <td>{{notification.emailCount}}</td>
+                        <td>{{notification.emailCount}}</td> <!-- this code was added for email count-->
                         <td><a href="#/notification_archive/view/{{notification.id}}">View</a></td>
                     </tr>
 
